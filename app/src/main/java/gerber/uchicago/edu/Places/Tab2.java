@@ -1,15 +1,13 @@
-package gerber.uchicago.edu;
+package gerber.uchicago.edu.Places;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.telephony.PhoneNumberUtils;
 import android.view.ActionMode;
@@ -20,9 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -30,13 +25,12 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import gerber.uchicago.edu.Restaurant;
+
+import gerber.uchicago.edu.FavActionUtility;
 
 import gerber.uchicago.edu.R;
 import gerber.uchicago.edu.db.RestosDbAdapter;
 import gerber.uchicago.edu.db.RestosSimpleCursorAdapter;
-import gerber.uchicago.edu.dummy.DummyContent;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 

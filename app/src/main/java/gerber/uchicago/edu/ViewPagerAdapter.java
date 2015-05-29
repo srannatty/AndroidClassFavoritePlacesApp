@@ -5,6 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import gerber.uchicago.edu.Places.Tab1;
+import gerber.uchicago.edu.Places.Tab2;
+import gerber.uchicago.edu.Places.Tab3;
+import gerber.uchicago.edu.Places.Tab4;
+
 /**
  * Created by Edwin on 15/02/2015.
  */

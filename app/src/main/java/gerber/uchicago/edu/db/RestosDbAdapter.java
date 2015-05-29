@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import gerber.uchicago.edu.Restaurant;
+import gerber.uchicago.edu.Places.Restaurant;
 
 import java.util.ArrayList;
 
@@ -123,7 +123,6 @@ public class RestosDbAdapter {
                 cursor.getString(INDEX_IMG_URL)
 
         );
-
         return resto;
     }
 

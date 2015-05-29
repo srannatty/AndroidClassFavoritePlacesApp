@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
@@ -12,8 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.Toolbar;
-import android.telephony.PhoneNumberUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -23,20 +20,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import java.util.List;
-
+import gerber.uchicago.edu.Places.Tab2;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 /**

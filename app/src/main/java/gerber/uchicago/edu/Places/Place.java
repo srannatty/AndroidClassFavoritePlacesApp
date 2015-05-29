@@ -1,4 +1,4 @@
-package gerber.uchicago.edu;
+package gerber.uchicago.edu.Places;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package gerber.uchicago.edu;
+package gerber.uchicago.edu.People;
 
 /**
  * Created by ag on 5/18/2015.

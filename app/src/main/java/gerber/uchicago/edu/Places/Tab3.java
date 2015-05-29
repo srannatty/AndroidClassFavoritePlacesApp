@@ -1,4 +1,4 @@
-package gerber.uchicago.edu;
+package gerber.uchicago.edu.Places;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
