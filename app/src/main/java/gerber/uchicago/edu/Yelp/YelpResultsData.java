@@ -26,7 +26,7 @@ public class YelpResultsData {
     public ArrayList<String> getSimpleValues() {
         ArrayList<String> simpleValues = new ArrayList<String>();
 
-
+            //apparently getting nulls?
         for (Business biz : businesses) {
             try {
                 simpleValues.add(biz.name + " | " + biz.location.address.get(0) + " | " + getStars(biz.rating_img_url));

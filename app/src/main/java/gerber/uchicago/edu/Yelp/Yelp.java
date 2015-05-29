@@ -47,8 +47,8 @@ public class Yelp {
     public YelpResultsData searchMultiple(String searchTerm, String city) {
 
         // Execute a signed call to the Yelp service.
-        OAuthService service = new ServiceBuilder().provider(YelpApi2.class).apiKey(CONSUMER_KEY).apiSecret(CONSUMER_SECRET).build();
-        Token accessToken = new Token(TOKEN, TOKEN_SECRET);
+        //OAuthService service = new ServiceBuilder().provider(YelpApi2.class).apiKey(CONSUMER_KEY).apiSecret(CONSUMER_SECRET).build();
+        //Token accessToken = new Token(TOKEN, TOKEN_SECRET);
         OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
 
         request.addQuerystringParameter("location", city);
@@ -56,8 +56,9 @@ public class Yelp {
         request.addQuerystringParameter("term", searchTerm);
         request.addQuerystringParameter("limit", "20");
 
-        service.signRequest(accessToken, request);
+        this.service.signRequest(this.accessToken, request);
         Response response = request.send();
+        //Invalid Signature error
         String rawData = response.getBody();
 
         YelpResultsData mYelpSearchResult = null;
@@ -69,6 +70,8 @@ public class Yelp {
         }
         return mYelpSearchResult;
     }
+
+
 
 
 

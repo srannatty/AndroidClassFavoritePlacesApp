@@ -214,7 +214,7 @@ public class Tab4 extends Fragment {
         mPhotoView = (ImageView) v.findViewById(R.id.restaurant_image_view);
 
         //default behavior is to create a new restaurant which is indicated by green
-        mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_green));
+        //mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_green));
 
         //the default on new restaurant is non-favorite
         toggleFavoriteView(false);
@@ -236,7 +236,7 @@ public class Tab4 extends Fragment {
             mSaveButton.setText("Update");
 
             //set the root view group to light blue to indicate editing
-            mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_blue));
+            //mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_blue));
             //toggle the color view green or orange
             toggleFavoriteView(mCheckFavorite.isChecked());
 
@@ -536,12 +536,14 @@ public class Tab4 extends Fragment {
         @Override
         protected void onPostExecute(YelpResultsData yelpResultsData) {
             progressDialog.dismiss();
+            //Getting nulls here
             mYelpResultsData = yelpResultsData;
 
             if (mYelpResultsData == null){
                 Toast.makeText(getActivity(), "No data for that search term", Toast.LENGTH_SHORT).show();
                 return;
             }
+            //This is where things break
             ArrayList<String> stringArrayList = mYelpResultsData.getSimpleValues();
             if (stringArrayList.size() == 0) {
                 Toast.makeText(getActivity(), "No data for that search term", Toast.LENGTH_SHORT).show();
