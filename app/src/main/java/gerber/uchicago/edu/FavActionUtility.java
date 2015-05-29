@@ -9,6 +9,8 @@ import android.net.Uri;
 /**
  * Created by Adam Gerber on 5/27/2014.
  * University of Chicago
+ * Jennifer Um:
+ * This tells what to do upon selecting the item and the menu options
  */
 public class FavActionUtility {
 
@@ -18,12 +20,14 @@ public class FavActionUtility {
         mContext = context;
     }
 
+    //TODO this doesn't work either
     public void navigateTo(String strAddress, String strCity) throws Exception {
         Intent intentNavTo = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("google.navigation:q=" + strAddress + " " + strCity));
           mContext.startActivity(intentNavTo);
     }
 
+    //TODO this currently doesn't work
     public void mapOf(String strAddress, String strCity) throws Exception {
         Intent intentMapOf = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("geo:0,0?q=" + strAddress + " " + strCity));

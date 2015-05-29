@@ -36,6 +36,7 @@ import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 public class Tab2 extends Fragment  {
 
+    //TAB2 IS ACTUALLY TAB1
     //private ListView mListView;
     private RestosDbAdapter mDbAdapter;
     private RestosSimpleCursorAdapter mCursorAdapter;

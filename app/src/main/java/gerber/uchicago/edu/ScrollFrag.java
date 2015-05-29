@@ -37,8 +37,6 @@ public class ScrollFrag extends Fragment {
             nLayout = R.layout.frag_scroll_layout_new;
         }
 
-
-
         StateMgr.getInstance().put(nLayout, this);
 
         View v = inflater.inflate(nLayout,container,false);

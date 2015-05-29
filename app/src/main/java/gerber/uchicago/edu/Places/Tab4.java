@@ -49,6 +49,7 @@ import gerber.uchicago.edu.db.RestosDbAdapter;
  */
 public class Tab4 extends Fragment {
 
+    //THIS IS TAB 4, ACTUALLY adding new restaurant
     private LinearLayout mRootViewGroup;
     private EditText mNameField, mCityField, mAddressField, mPhoneField, mYelpField;
     private TextView mPhoneText, mAddressText, mYelpText;
