@@ -6,16 +6,12 @@
               android:layout_width="match_parent"
               android:layout_height="100dp"
               android:background="@color/purple_dark"
-
-
     >
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="95dp"
-
-
         >
 
         <View
@@ -36,8 +32,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-
-
             >
 
         <TextView

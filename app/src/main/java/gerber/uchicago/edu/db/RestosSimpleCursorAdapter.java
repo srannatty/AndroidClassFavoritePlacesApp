@@ -47,7 +47,7 @@ public class RestosSimpleCursorAdapter extends SimpleCursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return super.newView(context, cursor, parent);
     }
-
+    //function with problem
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
@@ -70,7 +70,7 @@ public class RestosSimpleCursorAdapter extends SimpleCursorAdapter {
 
             view.setTag(holder);
         }
-
+        //getting nullpointer bindview? //cursor.getstring is getting the error. holder.nName must be empty?
         holder.textViewName.setText(cursor.getString(holder.nName));
         holder.textViewCity.setText(cursor.getString(holder.nCity));
         holder.networkImageView.setImageUrl(cursor.getString(holder.nNiv), mImageLoader);
@@ -79,9 +79,6 @@ public class RestosSimpleCursorAdapter extends SimpleCursorAdapter {
             holder.viewImportant.setBackgroundColor(context.getResources().getColor(R.color.orange));
         else
             holder.viewImportant.setBackgroundColor(context.getResources().getColor(R.color.green));
-
-
-
     }
 
     static class ViewHolder {

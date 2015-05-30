@@ -36,7 +36,7 @@ import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 public class Tab2 extends Fragment  {
 
-    //TAB2 IS ACTUALLY TAB1
+    //TAB2 IS ACTUALLY TAB1--ListView of Restaurants
     //private ListView mListView;
     private RestosDbAdapter mDbAdapter;
     private RestosSimpleCursorAdapter mCursorAdapter;
@@ -366,7 +366,6 @@ public class Tab2 extends Fragment  {
      */
     public interface OnTab2InteractionListener {
 
-
         // TODO: Update argument type and name
         public void onTab2Interaction(String id);
     }
@@ -396,7 +395,6 @@ public class Tab2 extends Fragment  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
 
         }
         return true;
