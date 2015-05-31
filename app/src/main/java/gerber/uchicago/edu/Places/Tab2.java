@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.telephony.PhoneNumberUtils;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -28,6 +30,7 @@ import android.widget.ListView;
 
 import gerber.uchicago.edu.FavActionUtility;
 
+import gerber.uchicago.edu.MainActivity;
 import gerber.uchicago.edu.R;
 import gerber.uchicago.edu.db.RestosDbAdapter;
 import gerber.uchicago.edu.db.RestosSimpleCursorAdapter;
@@ -221,9 +224,18 @@ public class Tab2 extends Fragment  {
                             switch (position) {
                                 case 0:
                                     //edit
-                                   // Intent intent = new Intent(getActivity(), EditRestoActivity.class);
-                                  //  intent.putExtra("resto_bundle_key", mRestoClicked);
-                                   // startActivity(intent);
+                                    /*
+                                    Fragment Frag_editing = new Tab1();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    //This part I don't know how to do it Not sure R.id.pager is R.id.container:
+                                    //"R.id.container is the container (FrameLayout or other layouts) for the activity that calls the fragment"
+                                    fragmentTransaction.replace(R.id.pager, Frag_editing);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                    */
+                                    ((MainActivity)getActivity()).gotoEditTab(id);
+
                                     break;
                                 case 1:
                                     //share

@@ -101,6 +101,25 @@ public class RestosDbAdapter {
 
     }
 
+    //UPDATE
+    public void updateResto(Restaurant resto) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(COL_FAV, resto.getFavorite());
+        values.put(COL_NAME, resto.getName());
+        values.put(COL_CITY, resto.getCity());
+        values.put(COL_ADDRESS, resto.getAddress());
+        values.put(COL_PHONE, resto.getPhone());
+        values.put(COL_YELP, resto.getYelp());
+        values.put(COL_IMG_URL, resto.getImageUrl());
+
+
+        mDb.update(SQLITE_TABLE, values,
+                COL_ID + "=?", new String[]{String.valueOf(resto.getId())});
+
+    }
+
 
     //READ
     public Restaurant fetchRestoById(int id) {
@@ -142,24 +161,7 @@ public class RestosDbAdapter {
 
 
 
-    //UPDATE
-    public void updateResto(Restaurant resto) {
 
-        ContentValues values = new ContentValues();
-
-        values.put(COL_FAV, resto.getFavorite());
-        values.put(COL_NAME, resto.getName());
-        values.put(COL_CITY, resto.getCity());
-        values.put(COL_ADDRESS, resto.getAddress());
-        values.put(COL_PHONE, resto.getPhone());
-        values.put(COL_YELP, resto.getYelp());
-        values.put(COL_IMG_URL, resto.getImageUrl());
-
-
-         mDb.update(SQLITE_TABLE, values,
-                COL_ID + "=?", new String[]{String.valueOf(resto.getId())});
-
-    }
 
 
     //DELETE

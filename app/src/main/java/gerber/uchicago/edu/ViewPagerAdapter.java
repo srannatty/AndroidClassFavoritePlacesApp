@@ -29,10 +29,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     //This method return the fragment for the every position in the View Pager
-    //TODO THE TAB ORDERS ARE SHIT
+    //TODO THE TAB ORDERS ARE a little weird!
     @Override
     public Fragment getItem(int position) {
-
 
         switch (position){
             case 2:

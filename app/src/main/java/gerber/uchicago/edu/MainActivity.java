@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import gerber.uchicago.edu.Places.Tab1;
 import gerber.uchicago.edu.Places.Tab2;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
@@ -48,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
     boolean bButtonArray[] = new boolean[3];
     SharedPreferences mPreferences;
 
+    long mRecentIdClicked;
 
     //private Menu mMenu;
 
@@ -125,6 +127,13 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
 
     }
 
+    public void gotoEditTab(long itemID) {
+        mRecentIdClicked = itemID;
+        //Bundle bundle=new Bundle();
+        //bundle.putLong("RestoID", itemID);
+        pager.setCurrentItem(2);
+    }
+
     private void inflateActionBar(ActionBar bar, int pos) {
 
         LayoutInflater inflator = (LayoutInflater) this
@@ -176,7 +185,7 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
 
                 if (bButtonArray[2]) {
 
-
+                    //This Button is the Filter Button
                     //this is just an example sound
                     SoundVibeUtils.playSound(MainActivity.this, R.raw.power_up);
 

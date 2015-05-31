@@ -10,8 +10,6 @@ import android.preference.PreferenceManager;
 public class PrefsMgr {
 
 
-
-
     private static SharedPreferences sSharedPreferences;
 
     public static void setString(Context context, String locale, String code) {
