@@ -16,18 +16,16 @@ import com.android.volley.toolbox.Volley;
 
 import gerber.uchicago.edu.R;
 
-
 /**
- * Created by Adam Gerber on 5/12/2014.
- * University of Chicago
+ * Created by jennifer1 on 5/31/15.
  */
+public class RestosGridCursorAdapter extends SimpleCursorAdapter {
 
-public class RestosSimpleCursorAdapter extends SimpleCursorAdapter {
 
     private ImageLoader mImageLoader;
     private RequestQueue mRequestQueue;
 
-    public RestosSimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    public RestosGridCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
 
         mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -58,38 +56,41 @@ public class RestosSimpleCursorAdapter extends SimpleCursorAdapter {
             holder = new ViewHolder();
 
             holder.nName = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_NAME);
-            holder.nCity = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_CITY);
-            holder.nFav = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_FAV);
             holder.nNiv = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_IMG_URL);
+            //holder.nCity = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_CITY);
+            //holder.nFav = cursor.getColumnIndexOrThrow(RestosDbAdapter.COL_FAV);
 
-            holder.viewImportant =  view.findViewById(R.id.list_tab);
-            holder.textViewName = (TextView) view.findViewById(R.id.list_text);
-            holder.textViewCity = (TextView) view.findViewById(R.id.list_city);
-            holder.networkImageView = (NetworkImageView) view.findViewById(R.id.list_niv);
 
+            holder.textViewName = (TextView) view.findViewById(R.id.grid_resto_name);
+            holder.networkImageView = (NetworkImageView) view.findViewById(R.id.grid_resto_niv);
+            //holder.textViewCity = (TextView) view.findViewById(R.id.grid_resto_city);
+            //holder.viewImportant =  view.findViewById(R.id.grid_resto_tab);
 
             view.setTag(holder);
         }
+
         holder.textViewName.setText(cursor.getString(holder.nName));
-        holder.textViewCity.setText(cursor.getString(holder.nCity));
+        //holder.textViewCity.setText(cursor.getString(holder.nCity));
         holder.networkImageView.setImageUrl(cursor.getString(holder.nNiv), mImageLoader);
 
+        /*
         if (cursor.getInt(holder.nFav) > 0)
             holder.viewImportant.setBackgroundColor(context.getResources().getColor(R.color.orange));
         else
             holder.viewImportant.setBackgroundColor(context.getResources().getColor(R.color.green));
+            */
     }
 
     static class ViewHolder {
 
         int nName;
-        int nCity;
-        int nFav;
         int nNiv;
+        //int nCity;
+        //int nFav;
 
         TextView textViewName;
-        TextView textViewCity;
-        View viewImportant;
         NetworkImageView networkImageView;
+        //TextView textViewCity;
+        //View viewImportant;
     }
 }

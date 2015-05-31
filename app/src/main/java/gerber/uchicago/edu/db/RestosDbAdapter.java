@@ -188,6 +188,7 @@ public class RestosDbAdapter {
         restos.add( new Restaurant(0, "The Gage", "Chicago", "24 S. Michigan Ave", "3123724243", "http://www.yelp.com/biz/the-gage-chicago", "http://3.bp.blogspot.com/_fr_ZFOsr3a8/TBoSrzXzPWI/AAAAAAAAHNQ/dcm-ZfTSGgU/s1600/Gage+exterior.jpg"));
         restos.add( new Restaurant(1, "Stetsons Modern Steak + Sushi", "Chicago", "151 E Wacker Dr", "3122394491", "http://www.yelp.com/biz/stetsons-modern-steak-sushi-chicago-2", "http://www.opentable.com/img/pdThumbnails/1729.jpg"));
         restos.add( new Restaurant(0, "Cai", "Chicago", "2100 S Archer Ave", "3123266888", "http://www.yelp.com/biz/cai-chicago", "http://media.timeout.com/images/100903221/60/45/image.jpg"));
+        /*
         restos.add( new Restaurant(0, "The Gage", "Chicago", "24 S. Michigan Ave", "3123724243", "http://www.yelp.com/biz/the-gage-chicago", "http://3.bp.blogspot.com/_fr_ZFOsr3a8/TBoSrzXzPWI/AAAAAAAAHNQ/dcm-ZfTSGgU/s1600/Gage+exterior.jpg"));
         restos.add( new Restaurant(1, "Stetsons Modern Steak + Sushi", "Chicago", "151 E Wacker Dr", "3122394491", "http://www.yelp.com/biz/stetsons-modern-steak-sushi-chicago-2", "http://www.opentable.com/img/pdThumbnails/1729.jpg"));
         restos.add( new Restaurant(0, "Cai", "Chicago", "2100 S Archer Ave", "3123266888", "http://www.yelp.com/biz/cai-chicago", "http://media.timeout.com/images/100903221/60/45/image.jpg"));
@@ -197,7 +198,7 @@ public class RestosDbAdapter {
         restos.add( new Restaurant(0, "The Gage", "Chicago", "24 S. Michigan Ave", "3123724243", "http://www.yelp.com/biz/the-gage-chicago", "http://3.bp.blogspot.com/_fr_ZFOsr3a8/TBoSrzXzPWI/AAAAAAAAHNQ/dcm-ZfTSGgU/s1600/Gage+exterior.jpg"));
         restos.add( new Restaurant(1, "Stetsons Modern Steak + Sushi", "Chicago", "151 E Wacker Dr", "3122394491", "http://www.yelp.com/biz/stetsons-modern-steak-sushi-chicago-2", "http://www.opentable.com/img/pdThumbnails/1729.jpg"));
         restos.add( new Restaurant(0, "Cai", "Chicago", "2100 S Archer Ave", "3123266888", "http://www.yelp.com/biz/cai-chicago", "http://media.timeout.com/images/100903221/60/45/image.jpg"));
-
+        */
         for (Restaurant resto : restos) {
             createResto(resto);
         }

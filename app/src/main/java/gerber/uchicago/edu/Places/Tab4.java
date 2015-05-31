@@ -163,8 +163,6 @@ public class Tab4 extends Fragment {
 
                     }
 
-                    //finish();
-
                 }
 
             }

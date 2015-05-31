@@ -118,7 +118,7 @@ public class Tab2 extends Fragment  {
 
         super.onCreate(savedInstanceState);
 
-
+        //why do we have this again?
         mListView = (ListView) view.findViewById(R.id.reminders_list_view);
         mListView.setDivider(null);
 
@@ -133,7 +133,6 @@ public class Tab2 extends Fragment  {
         //get the value associated with "very_first_load";  return true if there is no value in SharedPreferences (will happen on the very first time only)
         boolean bFirstLoad = mPreferences.getBoolean(VERY_FIRST_LOAD, true);
         if (bFirstLoad) {
-
             mDbAdapter.insertSomeRestos();
             //set the flag in preferences so that this block will never be called again.
             mPreferences.edit().putBoolean(VERY_FIRST_LOAD, false).commit();
@@ -230,8 +229,8 @@ public class Tab2 extends Fragment  {
                                     fragmentTransaction.addToBackStack(null);
                                     fragmentTransaction.commit();
                                     */
+                                    //error here
                                     ((MainActivity)getActivity()).gotoEditTab(mIdClicked);
-
                                     break;
                                 case 1:
                                     //share

@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
     boolean bButtonArray[] = new boolean[3];
     SharedPreferences mPreferences;
 
-    long mRecentIdClicked;
+    int mRecentIdClicked;
 
     //private Menu mMenu;
 
@@ -127,13 +127,18 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
 
     }
 
-    public void gotoEditTab(long itemID) {
+    public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
-        Bundle bundle=new Bundle();
-        bundle.putLong("RestoID", itemID);
-        Tab1 tab1 = new Tab1();
-        tab1.setArguments(bundle);
+        //Bundle bundle=new Bundle();
+        //bundle.putLong("RestoID", itemID);
+        //Tab1 tab1 = new Tab1();
+        //tab1.setArguments(bundle);
         pager.setCurrentItem(2);
+        return;
+    }
+
+    public int getRecentIdClicked() {
+        return mRecentIdClicked;
     }
 
     private void inflateActionBar(ActionBar bar, int pos) {

@@ -24,6 +24,7 @@ import java.util.List;
 
 import gerber.uchicago.edu.R;
 import gerber.uchicago.edu.db.RestosDbAdapter;
+import gerber.uchicago.edu.db.RestosGridCursorAdapter;
 import gerber.uchicago.edu.db.RestosSimpleCursorAdapter;
 
 /**
@@ -34,9 +35,8 @@ public class Tab3 extends Fragment {
 
     //database and adapter
     private RestosDbAdapter mDbAdapter;
-    private RestosSimpleCursorAdapter mCursorAdapter;
+    private RestosGridCursorAdapter mCursorAdapter;
     //private ListAdapter mAdapter;
-
     private GridView mGridView;
 
 
@@ -71,30 +71,29 @@ public class Tab3 extends Fragment {
         }
 
         mSortOrder = mPreferences.getString(SORT_ORDER, null);
-
-        mSortOrder = mPreferences.getString(SORT_ORDER, null);
         Cursor cursor = mDbAdapter.fetchAllRestos(getSortOrder());
 
         //from columns defined in the db
         String[] from = new String[]{
-                RestosDbAdapter.COL_NAME,
-                RestosDbAdapter.COL_CITY
+
+                RestosDbAdapter.COL_NAME
+                //RestosDbAdapter.COL_CITY
         };
 
         //to the ids of views in the layout
         int[] to = new int[]{
-                R.id.list_text,
+                R.id.grid_resto_name
                 //R.id.grid_resto_name,
-                R.id.list_city
+                //R.id.list_city
                 //R.id.grid_resto_city
         };
 
-        mCursorAdapter = new RestosSimpleCursorAdapter(
+        mCursorAdapter = new RestosGridCursorAdapter(
                 //context
                 getActivity(),
                 //the layout of the row - now pulling from our new layout
-                //When I change to grid, the app doesn't work get null pointer exception RSCursorAdapter.bindView
-                R.layout.restos_row,
+                //When I change to grid, the app doesn't work
+                R.layout.restos_grid,
                 //cursor
                 cursor,
                 //from columns defined in the db
@@ -105,8 +104,6 @@ public class Tab3 extends Fragment {
                 0);
 
         mGridView.setAdapter(mCursorAdapter);
-
-        Log.d("tab2", "Should this be gridview?");
         return v;
     }
 
@@ -120,10 +117,10 @@ public class Tab3 extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnTab2InteractionListener {
+    public interface OnTab3InteractionListener {
 
         // TODO: Update argument type and name
-        public void onTab2Interaction(String id);
+        public void onTab3Interaction(String id);
     }
 
 
