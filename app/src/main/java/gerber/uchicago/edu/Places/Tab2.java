@@ -215,11 +215,7 @@ public class Tab2 extends Fragment  {
                 modeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
                         FavActionUtility favActionUtility = new FavActionUtility(getActivity());
-
-
                         try {
                             switch (position) {
                                 case 0:
@@ -234,7 +230,7 @@ public class Tab2 extends Fragment  {
                                     fragmentTransaction.addToBackStack(null);
                                     fragmentTransaction.commit();
                                     */
-                                    ((MainActivity)getActivity()).gotoEditTab(id);
+                                    ((MainActivity)getActivity()).gotoEditTab(mIdClicked);
 
                                     break;
                                 case 1:

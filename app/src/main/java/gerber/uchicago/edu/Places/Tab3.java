@@ -51,7 +51,6 @@ public class Tab3 extends Fragment {
         View v = inflater.inflate(R.layout.fragment_place_grid,container,false);
 
         //super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_grid);
 
         mGridView = (GridView) v.findViewById(android.R.id.list);
 

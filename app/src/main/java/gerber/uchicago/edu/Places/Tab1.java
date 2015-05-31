@@ -50,6 +50,7 @@ public class Tab1 extends Fragment {
 //THIS IS TAB3, EDIT oncreateview is not there, than there's just empty layout.
 
     private long mItemid = -1; //-1 denotes no item selected
+
     private LinearLayout mRootViewGroup;
     private EditText mNameField, mCityField, mAddressField, mPhoneField, mYelpField;
     private TextView mPhoneText, mAddressText, mYelpText;
@@ -89,7 +90,9 @@ public class Tab1 extends Fragment {
         View v =inflater.inflate(R.layout.frag_scroll_layout_edit,container,false);
         //this doesnt seem to do the work that Tab 1 is actually doing right now....
 
-        if (savedInstanceState != null) {
+        //IDbundle is getting null
+        final Bundle IDbundle = getArguments();
+        if (IDbundle != null) {
             mItemid = getArguments().getLong("RestoID");
         }
 
@@ -104,6 +107,30 @@ public class Tab1 extends Fragment {
         }
         else {
             mRestaurant = null;
+        }
+
+        if (mRestaurant != null) {
+            //populate the fields from the Restaurant we passed into the intent
+            mNameField.setText(mRestaurant.getName());
+            mCityField.setText(mRestaurant.getCity());
+            mAddressField.setText(mRestaurant.getAddress());
+            mPhoneField.setText(PhoneNumberUtils.formatNumber(mRestaurant.getPhone()));
+            mYelpField.setText(mRestaurant.getYelp());
+            mCheckFavorite.setChecked(mRestaurant.getFavorite() == 1);
+            //change the "save" button label to "update"
+            mSaveButton.setText("Update");
+
+            //set the root view group to light blue to indicate editing
+            //mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_blue));
+            //toggle the color view green or orange
+            toggleFavoriteView(mCheckFavorite.isChecked());
+
+            //if this is a edit record then set the save button to enabled and extract button to visible
+            mSaveButton.setEnabled(true);
+            mExtractButton.setVisibility(View.VISIBLE);
+            mStrImageUrl = mRestaurant.getImageUrl();
+
+            fetchPhoto(mPhotoView);
         }
 
         //This is where things break
@@ -122,6 +149,9 @@ public class Tab1 extends Fragment {
         mPhoneField = (EditText) v.findViewById(R.id.restaurant_phone);
         mYelpField = (EditText) v.findViewById(R.id.restaurant_yelp);
         mExtractButton = (Button) v.findViewById(R.id.extract_yelp_button);
+
+
+        //button behaviors
         mExtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,9 +204,6 @@ public class Tab1 extends Fragment {
                         mDbAdapter.updateResto(restoEdit);
 
                     }
-
-                    //finish();
-
                 }
 
             }
@@ -192,8 +219,9 @@ public class Tab1 extends Fragment {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Don't do anything -- doesn't make sense to finish a fragment
-                /*finish();*/
+                /*
+                    Not sure what CancelButton should do at this point
+                 */
             }
         });
         mViewFavorite = v.findViewById(R.id.view_favorite);
@@ -237,30 +265,6 @@ public class Tab1 extends Fragment {
         mExtractButton.setVisibility(View.GONE);
 
 
-        if (mRestaurant != null) {
-            //populate the fields from the Restaurant we passed into the intent
-            mNameField.setText(mRestaurant.getName());
-            mCityField.setText(mRestaurant.getCity());
-            mAddressField.setText(mRestaurant.getAddress());
-            mPhoneField.setText(PhoneNumberUtils.formatNumber(mRestaurant.getPhone()));
-            mYelpField.setText(mRestaurant.getYelp());
-            mCheckFavorite.setChecked(mRestaurant.getFavorite() == 1);
-            //change the "save" button label to "update"
-            mSaveButton.setText("Update");
-
-            //set the root view group to light blue to indicate editing
-            //mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_blue));
-            //toggle the color view green or orange
-            toggleFavoriteView(mCheckFavorite.isChecked());
-
-            //if this is a edit record then set the save button to enabled and extract button to visible
-            mSaveButton.setEnabled(true);
-            mExtractButton.setVisibility(View.VISIBLE);
-
-            mStrImageUrl = mRestaurant.getImageUrl();
-
-            fetchPhoto(mPhotoView);
-        }
 
 
 
