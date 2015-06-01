@@ -118,10 +118,10 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
             //set the flag in preferences so that this block will never be called again.
             mPreferences.edit().putBoolean(VERY_FIRST_LOAD_MAIN, false).commit();
         } else {
-
             //get it from the prefs
             bButtonArray = PrefsMgr.getBooleanArray(this, BOOLEAN_ARRAY_KEY, bButtonArray.length );
         }
+        adapter.setbPeople(bButtonArray[0]);
         inflateActionBar(actionBar, 0);
 
 
@@ -158,12 +158,14 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
         v0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Person button
                 Log.d("view0", "GGG");
                 bButtonArray[0] = !bButtonArray[0];
                 bButtonArray[1] = !bButtonArray[1];
                 toggleActionBarButton(0, bButtonArray[0]);
                 toggleActionBarButton(1, bButtonArray[1]);
                 PrefsMgr.setBooleanArray(MainActivity.this, BOOLEAN_ARRAY_KEY, bButtonArray);
+                adapter.setbPeople(bButtonArray[0]);
 
             }
         });
@@ -171,12 +173,14 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Places Button
                 Log.d("view1", "GGG");
                 bButtonArray[1] = !bButtonArray[1];
                 bButtonArray[0] = !bButtonArray[0];
                 toggleActionBarButton(0, bButtonArray[0]);
                 toggleActionBarButton(1, bButtonArray[1]);
                 PrefsMgr.setBooleanArray(MainActivity.this, BOOLEAN_ARRAY_KEY, bButtonArray);
+                adapter.setbPeople(bButtonArray[0]);
 
             }
         });
@@ -184,6 +188,7 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
         v2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Category Button
                 Log.d("view2", "GGG");
                 bButtonArray[2] = !bButtonArray[2];
                 toggleActionBarButton(2, bButtonArray[2]);
@@ -211,7 +216,6 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
                     window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     window.setGravity(Gravity.CENTER);
 
-
                     // mIdClicked = getIdFromPosition(masterListPosition);
                     //  mRestoClicked = mDbAdapter.fetchRestoById(mIdClicked);
                     dialog.setTitle("Set Filter");
@@ -223,7 +227,6 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
                         }
                     });
 
-
                 }
 
 
@@ -233,11 +236,9 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Search Button
                 Log.d("view3", "GGG");
-
-
                 mActionMode = MainActivity.this.startSupportActionMode(MainActivity.this);
-
 
             }
         });

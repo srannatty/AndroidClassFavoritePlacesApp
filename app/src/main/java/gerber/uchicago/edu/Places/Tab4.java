@@ -96,7 +96,7 @@ public class Tab4 extends Fragment {
 
         //This is where things break
         //This is NOT ScrollView!!!!!!
-        mRootViewGroup = (LinearLayout) v.findViewById(R.id.data_root_view_group);
+        mRootViewGroup = (LinearLayout) v.findViewById(R.id.data_root_view_group_resto_new);
 
 
         mNameField = (EditText) v.findViewById(R.id.restaurant_name);
@@ -542,7 +542,7 @@ public class Tab4 extends Fragment {
                 Toast.makeText(getActivity(), "No data for that search term", Toast.LENGTH_SHORT).show();
                 return;
             }
-            //This is where things break
+
             ArrayList<String> stringArrayList = mYelpResultsData.getSimpleValues();
             if (stringArrayList.size() == 0) {
                 Toast.makeText(getActivity(), "No data for that search term", Toast.LENGTH_SHORT).show();

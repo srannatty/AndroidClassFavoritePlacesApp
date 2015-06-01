@@ -52,8 +52,6 @@ public class Tab2 extends Fragment  {
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-
-
     private static final String ARG_PARAM2 = "param2";
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -336,10 +334,6 @@ public class Tab2 extends Fragment  {
             });
 
         }
-
-
-
-
 
         return view;
     }

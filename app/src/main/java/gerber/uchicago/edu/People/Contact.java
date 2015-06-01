@@ -7,12 +7,17 @@ public class Contact {
 	public String name;
 	public ArrayList<ContactEmail> emails;
 	public ArrayList<ContactPhone> numbers;
+    //Jennifer Added this, I might not use it at all
+	public String notes;
+    public String mImageUrl;
 
 	public Contact(String id, String name) {
 		this.id = id;
 		this.name = name;
 		this.emails = new ArrayList<ContactEmail>();
 		this.numbers = new ArrayList<ContactPhone>();
+        this.notes = "";
+        this.mImageUrl = "";
 	}
 
 	@Override
