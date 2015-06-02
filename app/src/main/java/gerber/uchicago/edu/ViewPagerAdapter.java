@@ -10,7 +10,7 @@ import gerber.uchicago.edu.People.Tab1List;
 import gerber.uchicago.edu.People.Tab2Grid;
 import gerber.uchicago.edu.People.Tab3Edit;
 import gerber.uchicago.edu.People.Tab4New;
-import gerber.uchicago.edu.Places.Tab1;
+import gerber.uchicago.edu.Places.Tab3EditResto;
 import gerber.uchicago.edu.Places.Tab2;
 import gerber.uchicago.edu.Places.Tab3;
 import gerber.uchicago.edu.Places.Tab4;
@@ -58,9 +58,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     return tab3Edit;
                 } else {
                     //todo race condition things
-                    Tab1 tab1 =
-                            Tab1.newInstance(((MainActivity)mContext).mRecentIdClicked);
-                    return tab1;
+                    Tab3EditResto tab3EditResto =
+                            Tab3EditResto.newInstance(((MainActivity) mContext).mRecentIdClicked);
+                    return tab3EditResto;
                 }
 
             case 0:
@@ -95,7 +95,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     Tab3Edit tabdefault1 = new Tab3Edit();
                     return tabdefault1;
                 } else {
-                    Tab1 tabdefault2 = new Tab1();
+                    Tab3EditResto tabdefault2 = new Tab3EditResto();
                     return tabdefault2;
                 }
         }

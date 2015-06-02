@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ import gerber.uchicago.edu.db.RestosDbAdapter;
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class Tab1 extends Fragment {
+public class Tab3EditResto extends Fragment {
     public static final String INT_KEY = "Int_Key";
     //THIS IS TAB3, EDIT oncreateview is not there, than there's just empty layout.
 
@@ -90,11 +89,11 @@ public class Tab1 extends Fragment {
         this.mItemid = id;
     }
 
-    public static Tab1 newInstance(int id) {
-        Tab1 tab1 = new Tab1();
+    public static Tab3EditResto newInstance(int id) {
+        Tab3EditResto tab3EditResto = new Tab3EditResto();
         Bundle bundle = new Bundle();
         bundle.putInt(INT_KEY,id);
-        return tab1;
+        return tab3EditResto;
     }
 
     @Override
