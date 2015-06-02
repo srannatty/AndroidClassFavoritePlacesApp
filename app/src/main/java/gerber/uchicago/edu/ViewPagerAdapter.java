@@ -11,8 +11,8 @@ import gerber.uchicago.edu.People.Tab2Grid;
 import gerber.uchicago.edu.People.Tab3Edit;
 import gerber.uchicago.edu.People.Tab4New;
 import gerber.uchicago.edu.Places.Tab3EditResto;
-import gerber.uchicago.edu.Places.Tab2;
-import gerber.uchicago.edu.Places.Tab3;
+import gerber.uchicago.edu.Places.Tab1ListResto;
+import gerber.uchicago.edu.Places.Tab2GridResto;
 import gerber.uchicago.edu.Places.Tab4;
 
 /**
@@ -68,8 +68,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     Tab1List tab1List = new Tab1List();
                     return tab1List;
                 } else {
-                    Tab2 tab2 = new Tab2();
-                    return tab2;
+                    Tab1ListResto tab1ListResto = new Tab1ListResto();
+                    return tab1ListResto;
                 }
 
             case 1:
@@ -77,8 +77,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     Tab2Grid tab2Grid = new Tab2Grid();
                     return tab2Grid;
                 } else {
-                    Tab3 tab3 = new Tab3();
-                    return tab3;
+                    Tab2GridResto tab2GridResto = new Tab2GridResto();
+                    return tab2GridResto;
                 }
 
             case 3:

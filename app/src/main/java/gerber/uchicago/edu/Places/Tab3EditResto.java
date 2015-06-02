@@ -101,13 +101,7 @@ public class Tab3EditResto extends Fragment {
         View v =inflater.inflate(R.layout.frag_scroll_layout_edit,container,false);
         //this doesnt seem to do the work that Tab 1 is actually doing right now....
 
-        //IDbundle is getting null
-/*
-        final Bundle IDbundle = getArguments();
-        if (IDbundle != null) {
-            mItemid = getArguments().getLong("RestoID");
-        }
-*/
+
         mItemid = ((MainActivity)getActivity()).getRecentIdClicked();
 
         //open the db adapter for db operations
@@ -192,7 +186,6 @@ public class Tab3EditResto extends Fragment {
                                 mStrImageUrl
                         );
                         mDbAdapter.updateResto(restoEdit);
-
                     }
                 }
 
@@ -277,8 +270,6 @@ public class Tab3EditResto extends Fragment {
 
             fetchPhoto(mPhotoView);
         }
-
-
 
 
 
@@ -456,12 +447,43 @@ public class Tab3EditResto extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        mRestaurant = null;
         mDbAdapter.close();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if ((mItemid != -1) && (mItemid != 0)) {
+            mRestaurant = mDbAdapter.fetchRestoById(mItemid);
+        }
+        else {
+            mRestaurant = null;
+        }
+
+        if (mRestaurant != null) {
+            //populate the fields from the Restaurant we passed into the intent
+            mNameField.setText(mRestaurant.getName());
+            mCityField.setText(mRestaurant.getCity());
+            mAddressField.setText(mRestaurant.getAddress());
+            mPhoneField.setText(PhoneNumberUtils.formatNumber(mRestaurant.getPhone()));
+            mYelpField.setText(mRestaurant.getYelp());
+            mCheckFavorite.setChecked(mRestaurant.getFavorite() == 1);
+            //change the "save" button label to "update"
+            mSaveButton.setText("Update");
+
+            //set the root view group to light blue to indicate editing
+            //mRootViewGroup.setBackgroundColor(getResources().getColor(R.color.light_blue));
+            //toggle the color view green or orange
+            toggleFavoriteView(mCheckFavorite.isChecked());
+
+            //if this is a edit record then set the save button to enabled and extract button to visible
+            mSaveButton.setEnabled(true);
+            mExtractButton.setVisibility(View.VISIBLE);
+            mStrImageUrl = mRestaurant.getImageUrl();
+
+            fetchPhoto(mPhotoView);
+        }
         mDbAdapter.open();
     }
 

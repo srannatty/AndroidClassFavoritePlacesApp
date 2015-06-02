@@ -2,47 +2,35 @@ package gerber.uchicago.edu.Places;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.telephony.PhoneNumberUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import gerber.uchicago.edu.FavActionUtility;
 import gerber.uchicago.edu.MainActivity;
 import gerber.uchicago.edu.R;
 import gerber.uchicago.edu.db.RestosDbAdapter;
 import gerber.uchicago.edu.db.RestosGridCursorAdapter;
-import gerber.uchicago.edu.db.RestosSimpleCursorAdapter;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class Tab3 extends Fragment {
+public class Tab2GridResto extends Fragment {
     //this is the GridView
 
     //database and adapter
@@ -50,7 +38,6 @@ public class Tab3 extends Fragment {
     private RestosGridCursorAdapter mCursorAdapter;
     //private ListAdapter mAdapter;
     private GridView mGridView;
-
 
 
     //Don't know if I need this
@@ -67,9 +54,10 @@ public class Tab3 extends Fragment {
     private String mParam1;
     private String mParam2;
     private OnTab3InteractionListener mListener;
+
     // TODO: Rename and change types of parameters
-    public static Tab3 newInstance(String param1, String param2) {
-        Tab3 fragment = new Tab3();
+    public static Tab2GridResto newInstance(String param1, String param2) {
+        Tab2GridResto fragment = new Tab2GridResto();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,7 +65,7 @@ public class Tab3 extends Fragment {
         return fragment;
     }
 
-    public Tab3() {
+    public Tab2GridResto() {
     }
 
 
@@ -277,7 +265,6 @@ public class Tab3 extends Fragment {
         mPreferences.edit().putString(SORT_ORDER, strSortOrder).commit();
 
     }
-
 
 
     private int getIdFromPosition(int nPosition) {

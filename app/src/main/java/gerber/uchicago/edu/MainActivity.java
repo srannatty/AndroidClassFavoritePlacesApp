@@ -27,14 +27,14 @@ import android.widget.LinearLayout;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import gerber.uchicago.edu.Places.Tab3EditResto;
-import gerber.uchicago.edu.Places.Tab2;
+import gerber.uchicago.edu.Places.Tab1ListResto;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 /**
  * Created by Edwin on 15/02/2015.
  */
 public class MainActivity extends ActionBarActivity implements
-        Tab2.OnTab2InteractionListener,
+        Tab1ListResto.OnTab2InteractionListener,
         Tab3EditResto.OnTab1InteractionListener,
         ViewPager.OnPageChangeListener,
         android.support.v7.view.ActionMode.Callback {
@@ -134,8 +134,10 @@ public class MainActivity extends ActionBarActivity implements
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
         //adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+        pager.setAdapter(adapter);
         pager.setCurrentItem(2);
-        adapter.notifyDataSetChanged();
+
         return;
     }
 

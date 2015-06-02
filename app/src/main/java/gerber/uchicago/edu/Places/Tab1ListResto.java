@@ -9,8 +9,6 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.telephony.PhoneNumberUtils;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -37,7 +35,7 @@ import gerber.uchicago.edu.db.RestosSimpleCursorAdapter;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 
-public class Tab2 extends Fragment  {
+public class Tab1ListResto extends Fragment  {
 
     //TAB2 IS ACTUALLY TAB1--ListView of Restaurants
     //private ListView mListView;
@@ -55,7 +53,6 @@ public class Tab2 extends Fragment  {
     private static final String ARG_PARAM2 = "param2";
     // TODO: Rename and change types of parameters
     private String mParam1;
-
     private String mParam2;
     private OnTab2InteractionListener mListener;
 
@@ -71,8 +68,8 @@ public class Tab2 extends Fragment  {
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static Tab2 newInstance(String param1, String param2) {
-        Tab2 fragment = new Tab2();
+    public static Tab1ListResto newInstance(String param1, String param2) {
+        Tab1ListResto fragment = new Tab1ListResto();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -84,7 +81,7 @@ public class Tab2 extends Fragment  {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Tab2() {
+    public Tab1ListResto() {
     }
 
     @Override
@@ -95,7 +92,6 @@ public class Tab2 extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
 
     }
 
