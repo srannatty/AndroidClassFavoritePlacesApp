@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Restaurant implements Serializable {
 
     private long mId;
-    private int mFavorite;
+    private int mFavorite; //change to category
     private String mName;
     private String mCity;
     private String mAddress;

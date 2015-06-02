@@ -3,13 +3,16 @@ package gerber.uchicago.edu;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.view.ActionMode;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,8 +24,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -43,6 +50,8 @@ public class MainActivity extends ActionBarActivity implements
     // Declaring Your View and Variables
     private static final String VERY_FIRST_LOAD_MAIN = "our_very_first_load_";
     public static final String BOOLEAN_ARRAY_KEY = "boolean_array_key";
+    public boolean bTutorial;
+
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
@@ -64,6 +73,16 @@ public class MainActivity extends ActionBarActivity implements
     // private LayoutInflater mInflator;
 
     private RestosDbAdapter mDbAdapter;
+
+    //Drawer
+    // variables for Drawer
+    private String[] mDrawerMenuTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private CharSequence mTitle;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +140,13 @@ public class MainActivity extends ActionBarActivity implements
                     bButtonArray[nC] = false;
                 }
             }
-
+            bTutorial = true;
             //set the flag in preferences so that this block will never be called again.
             mPreferences.edit().putBoolean(VERY_FIRST_LOAD_MAIN, false).commit();
+
         } else {
             //get it from the prefs
+            bTutorial = false;
             bButtonArray = PrefsMgr.getBooleanArray(this, BOOLEAN_ARRAY_KEY, bButtonArray.length );
         }
         adapter.setbPeople(bButtonArray[0]);
@@ -138,7 +159,51 @@ public class MainActivity extends ActionBarActivity implements
         mRecentIdClicked = mDbAdapter.fetchSomeID();
         mDbAdapter.close();
 
+        //Creating Drawer
+        mDrawerMenuTitles = getResources().getStringArray(R.array.drawer_menu_array);
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerMenuTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        if (bTutorial) {
+            //Open Tutorial on the first load
+            Intent tItn = new Intent(MainActivity.this, TutorialActivity.class);
+            tItn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tItn);
+        }
     }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //Toast.makeText(MainActivity.this, "Click on Navigation bar" + id, Toast.LENGTH_SHORT).show();
+            switch (position) {
+                case 0:
+                    //Listview Tab1
+                    pager.setCurrentItem(0);
+                    break;
+                case 1:
+                    //Gridview Tab2
+                    pager.setCurrentItem(1);
+                    break;
+                case 2:
+                    //Add New Tab4
+                    pager.setCurrentItem(3);
+                    break;
+                default:
+                    //Error case
+                    Toast.makeText(MainActivity.this, "No such item", Toast.LENGTH_SHORT).show();
+                    break;
+
+            }
+
+        }
+    }
+
 
 
     @Override

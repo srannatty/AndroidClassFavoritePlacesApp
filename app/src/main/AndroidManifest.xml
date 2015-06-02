@@ -38,6 +38,13 @@
             android:label="Dialog" >
         </activity>
 
+        <activity android:name="gerber.uchicago.edu.TutorialActivity"
+            android:screenOrientation="portrait"
+            android:label="Tutorial"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            >
+        </activity>
+
 
     </application>
 
