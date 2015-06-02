@@ -131,6 +131,11 @@ public class MainActivity extends ActionBarActivity implements
 
     }
 
+    public void changetab(int tabnumber) {
+        pager.setCurrentItem(tabnumber);
+    }
+
+
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
         //adapter.notifyDataSetChanged();
