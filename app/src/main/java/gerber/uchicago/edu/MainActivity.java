@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
         mTintManager.setStatusBarTintEnabled(true);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, mCharSequences fot the Tabs and Number Of Tabs.
-        adapter = new ViewPagerAdapter(getSupportFragmentManager(), mCharSequences, mNumboftabs);
+        adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), mCharSequences, mNumboftabs);
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
 
@@ -129,11 +129,9 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
 
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
-        //Bundle bundle=new Bundle();
-        //bundle.putLong("RestoID", itemID);
-        //Tab1 tab1 = new Tab1();
-        //tab1.setArguments(bundle);
+        adapter.notifyDataSetChanged();
         pager.setCurrentItem(2);
+
         return;
     }
 

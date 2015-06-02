@@ -2,6 +2,7 @@ package gerber.uchicago.edu.People;
 
 import android.content.ContentProviderOperation;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +30,15 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import gerber.uchicago.edu.GoogleResultsData;
 import gerber.uchicago.edu.JSONParser;
 import gerber.uchicago.edu.Places.Restaurant;
 import gerber.uchicago.edu.R;
+import gerber.uchicago.edu.ResultsDialogActivity;
+import gerber.uchicago.edu.Yelp.Yelp;
+import gerber.uchicago.edu.Yelp.YelpResultsData;
 
 /**
  * Created by jennifer1 on 5/31/15.
@@ -52,6 +58,7 @@ public class Tab4New extends Fragment {
     private Restaurant mRestaurant;
 
     private String mStrImageUrl = "";
+    private GoogleResultsData mImageResult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,7 +111,7 @@ public class Tab4New extends Fragment {
             @Override
             public void onClick(View view) {
                 //Search Google image and create the list
-
+                fetchPhoto(mPhotoView);
                 //hide soft keyboard
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mSearchField.getWindowToken(), 0);
@@ -189,22 +196,44 @@ public class Tab4New extends Fragment {
 
 
 
-    private void fetchPhoto(ImageView imageView) {
-        String strUrl = String.format("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s&imgsz=small&imgtype=photo",
-                mSearchField.getText().toString());
-        strUrl = strUrl.replaceAll("\\s+", "%20");
+    public ArrayList<String> ResultListToStringArray(List<GoogleResultsData.ResponseData.Result> list) {
 
-        new DownloadImageTask(imageView).execute(strUrl);
+        int listsize = list.size();
+        ArrayList<String> converted = new ArrayList<String>(20);
+        int loopCount;
+        //We just need 20 at maximum
+        if (listsize < 20) {
+            loopCount = listsize;
+        } else {
+            loopCount = 20;
+        }
 
+        GoogleResultsData.ResponseData.Result resultItem;
+
+        //conversion through loop
+        for (int i = 0; i < loopCount; i++ ) {
+            resultItem = list.get(i);
+            converted.add(i, resultItem.unescapedUrl);
+        }
+
+        return converted;
     }
 
 
 
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+    private void fetchPhoto(ImageView imageView) {
+        String strUrl = String.format("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s&imgsz=small&imgtype=photo",
+                mSearchField.getText().toString());
+        strUrl = strUrl.replaceAll("\\s+", "%20");
+        new PersonImageTask(imageView).execute(strUrl);
+    }
+
+    private class PersonImageTask extends AsyncTask<String, Void, GoogleResultsData> {
         ImageView mImageView;
 
-        public DownloadImageTask(ImageView imageViewParam) {
+        public PersonImageTask(ImageView imageViewParam) {
             this.mImageView = imageViewParam;
         }
 
@@ -215,44 +244,76 @@ public class Tab4New extends Fragment {
             mImageView.setImageResource(R.drawable.gear);
         }
 
-        protected Bitmap doInBackground(String... urls) {
+        protected GoogleResultsData doInBackground(String... urls) {
 
 
             GoogleResultsData googleResultsData = null;
-            Bitmap bitmap = null;
+            //Bitmap bitmap = null;
 
             try {
-
-                if (mStrImageUrl != null && !mStrImageUrl.equals("")){
-                    InputStream in = new java.net.URL(mStrImageUrl).openStream();
-                    bitmap = BitmapFactory.decodeStream(in);
-                } else {
-                    JSONObject jsonRaw = new JSONParser().getSecureJSONFromUrl(urls[0]);
-                    googleResultsData = new Gson().fromJson(jsonRaw.toString(), GoogleResultsData.class);
-                    mStrImageUrl = googleResultsData.responseData.results.get(0).unescapedUrl;
-                    InputStream in = new java.net.URL(mStrImageUrl).openStream();
-                    bitmap = BitmapFactory.decodeStream(in);
-                }
-
-
+                JSONObject jsonRaw = new JSONParser().getSecureJSONFromUrl(urls[0]);
+                googleResultsData = new Gson().fromJson(jsonRaw.toString(), GoogleResultsData.class);
+                //mStrImageUrl = googleResultsData.responseData.results.get(0).unescapedUrl;
+                //InputStream in = new java.net.URL(mStrImageUrl).openStream();
+                //bitmap = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return bitmap;
+            return googleResultsData;
         }
 
+        protected void onPostExecute(GoogleResultsData googleResult) {
 
+            mImageResult = googleResult;
 
-
-        protected void onPostExecute(Bitmap result) {
-            if (result == null){
+            if (mImageResult != null) {
                 mImageView.setImageResource(R.drawable.gear);
-                Toast.makeText(getActivity(), "Associated image not found on google", Toast.LENGTH_SHORT).show();
-            } else {
-                mImageView.setImageBitmap(result);
+                Toast.makeText(getActivity(), "No image for that search term", Toast.LENGTH_SHORT).show();
+                return;
             }
 
+            List<GoogleResultsData.ResponseData.Result> ImageList = mImageResult.responseData.results;
+            ArrayList<String> stringArrayList = ResultListToStringArray(ImageList);
 
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("image_data_bundle_key", stringArrayList);
+            Intent intent = new Intent(getActivity(), ImageResultActivity.class);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 1002);
+
+
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1002) {
+            if (resultCode == getActivity().RESULT_OK) {
+                //fetch the integer we passed into the dialog result which corresponds to the list position
+
+                int nResult = data.getIntExtra(ImageResultActivity.POSITION, -98);
+
+
+                if (nResult != -98) {
+                    try {
+                        mStrImageUrl = "";
+                        //YelpResultsData.Business biz = mYelpResultsData.businesses.get(nResult);
+                        //mNameField.setText(biz.name);
+                        //mAddressField.setText(biz.location.address.get(0));
+                        //mPhoneField.setText(PhoneNumberUtils.formatNumber(biz.phone));
+                        //mYelpField.setText(biz.url);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
+            if (resultCode == getActivity().RESULT_CANCELED) {
+                //do nothing
+            }
         }
     }
 

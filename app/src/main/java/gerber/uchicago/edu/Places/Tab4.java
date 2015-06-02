@@ -69,6 +69,8 @@ public class Tab4 extends Fragment {
     //gson model defined to store search results
     private YelpResultsData mYelpResultsData;
 
+
+
     //create this interface for instrumentation testing with threads
     private YelpTaskCallback mYelpTaskCallback;
 
@@ -569,7 +571,10 @@ public class Tab4 extends Fragment {
         if (requestCode == 1001) {
             if (resultCode == getActivity().RESULT_OK) {
                 //fetch the integer we passed into the dialog result which corresponds to the list position
+
                 int nResult = data.getIntExtra(ResultsDialogActivity.POSITION, -99);
+
+
                 if (nResult != -99) {
                     try {
                         mStrImageUrl = "";

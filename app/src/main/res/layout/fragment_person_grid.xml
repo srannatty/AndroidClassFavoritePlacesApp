@@ -6,10 +6,10 @@
     tools:context="gerber.uchicago.edu.ListFragment">
 
     <GridView
-        android:id="@android:id/list"
+        android:id="@+id/person_grid_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"/>
+        android:numColumns="3"/>
 
     <TextView
         android:id="@android:id/empty"

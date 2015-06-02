@@ -1,6 +1,7 @@
 package gerber.uchicago.edu;
 
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -21,15 +22,21 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     CharSequence Titles[]; // This will Store the mCharSequences of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
     boolean bPeople;
+    Context mContext;
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
         super(fm);
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
+    }
 
+    public ViewPagerAdapter(Context context, FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
+        super(fm);
+        this.mContext = context;
+        this.Titles = mTitles;
+        this.NumbOfTabs = mNumbOfTabsumb;
     }
 
     public void setbPeople(boolean b) {
@@ -41,7 +48,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     //This method return the fragment for the every position in the View Pager
-    //TODO THE TAB ORDERS ARE a little weird!
     @Override
     public Fragment getItem(int position) {
 
@@ -51,7 +57,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     Tab3Edit tab3Edit = new Tab3Edit();
                     return tab3Edit;
                 } else {
-                    Tab1 tab1 = new Tab1();
+                    //todo race condition things
+                    Tab1 tab1 =
+                            Tab1.newInstance(((MainActivity)mContext).mRecentIdClicked);
                     return tab1;
                 }
 

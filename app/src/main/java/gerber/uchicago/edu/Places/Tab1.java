@@ -48,7 +48,8 @@ import gerber.uchicago.edu.db.RestosDbAdapter;
  * Created by Edwin on 15/02/2015.
  */
 public class Tab1 extends Fragment {
-//THIS IS TAB3, EDIT oncreateview is not there, than there's just empty layout.
+    public static final String INT_KEY = "Int_Key";
+    //THIS IS TAB3, EDIT oncreateview is not there, than there's just empty layout.
 
     private int mItemid = -1; //-1 denotes no item selected
 
@@ -84,6 +85,13 @@ public class Tab1 extends Fragment {
 
     public void setItemid(int id) {
         this.mItemid = id;
+    }
+
+    public static Tab1 newInstance(int id) {
+        Tab1 tab1 = new Tab1();
+        Bundle bundle = new Bundle();
+        bundle.putInt(INT_KEY,id);
+        return tab1;
     }
 
     @Override

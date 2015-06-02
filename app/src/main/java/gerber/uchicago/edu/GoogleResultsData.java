@@ -8,12 +8,22 @@ import java.util.List;
  */
 public class GoogleResultsData {
     public ResponseData  responseData;
+
+
+
+
     public class ResponseData {
         public List<Result> results;
+
+
         public class Result {
             public String unescapedUrl;
         }
+
+
     }
+
+
 
 
 }
