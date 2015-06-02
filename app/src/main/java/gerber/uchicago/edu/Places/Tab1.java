@@ -1,5 +1,6 @@
 package gerber.uchicago.edu.Places;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,6 +53,8 @@ public class Tab1 extends Fragment {
     //THIS IS TAB3, EDIT oncreateview is not there, than there's just empty layout.
 
     private int mItemid = -1; //-1 denotes no item selected
+
+    private OnTab1InteractionListener mListener;
 
     private LinearLayout mRootViewGroup;
     private EditText mNameField, mCityField, mAddressField, mPhoneField, mYelpField;
@@ -281,6 +284,39 @@ public class Tab1 extends Fragment {
 
 
         return v;
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnTab1InteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnTab1InteractionListener {
+        // TODO: Update argument type and name
+        public void onTab1Interaction(int id);
     }
 
 

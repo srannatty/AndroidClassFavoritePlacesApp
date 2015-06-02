@@ -52,6 +52,7 @@ public class Tab3 extends Fragment {
     private GridView mGridView;
 
 
+
     //Don't know if I need this
     private SharedPreferences mPreferences;
     private static final String SORT_ORDER = "sort_order";

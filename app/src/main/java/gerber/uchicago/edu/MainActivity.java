@@ -33,7 +33,11 @@ import gerber.uchicago.edu.sound.SoundVibeUtils;
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class MainActivity extends ActionBarActivity implements Tab2.OnTab2InteractionListener, ViewPager.OnPageChangeListener, android.support.v7.view.ActionMode.Callback {
+public class MainActivity extends ActionBarActivity implements
+        Tab2.OnTab2InteractionListener,
+        Tab1.OnTab1InteractionListener,
+        ViewPager.OnPageChangeListener,
+        android.support.v7.view.ActionMode.Callback {
 
     // Declaring Your View and Variables
     private static final String VERY_FIRST_LOAD_MAIN = "our_very_first_load_";
@@ -311,6 +315,11 @@ public class MainActivity extends ActionBarActivity implements Tab2.OnTab2Intera
     @Override
     public void onTab2Interaction(String id) {
 
+    }
+
+    @Override
+    public void onTab1Interaction(int id) {
+        mRecentIdClicked = id;
     }
 
 

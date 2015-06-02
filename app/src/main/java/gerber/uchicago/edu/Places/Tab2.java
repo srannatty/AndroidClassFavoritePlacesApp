@@ -217,17 +217,10 @@ public class Tab2 extends Fragment  {
                             switch (position) {
                                 case 0:
                                     //edit
-                                    /*
-                                    Fragment Frag_editing = new Tab1();
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    //This part I don't know how to do it Not sure R.id.pager is R.id.container:
-                                    //"R.id.container is the container (FrameLayout or other layouts) for the activity that calls the fragment"
-                                    fragmentTransaction.replace(R.id.pager, Frag_editing);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-                                    */
-                                    //error here
+                                    //Bundle bundle = new Bundle();
+                                    //bundle.putSerializable("Edit_Resto",mRestoClicked);
+
+
                                     ((MainActivity)getActivity()).gotoEditTab(mIdClicked);
                                     break;
                                 case 1:
@@ -366,7 +359,6 @@ public class Tab2 extends Fragment  {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnTab2InteractionListener {
-
         // TODO: Update argument type and name
         public void onTab2Interaction(String id);
     }
