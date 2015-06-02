@@ -204,9 +204,7 @@ public class Tab3EditResto extends Fragment {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                    Not sure what CancelButton should do at this point
-                 */
+                ((MainActivity) getActivity()).changetab(0);
             }
         });
         mViewFavorite = v.findViewById(R.id.view_favorite);

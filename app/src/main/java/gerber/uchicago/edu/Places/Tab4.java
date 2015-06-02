@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import gerber.uchicago.edu.FavActionUtility;
 import gerber.uchicago.edu.GoogleResultsData;
 import gerber.uchicago.edu.JSONParser;
+import gerber.uchicago.edu.MainActivity;
 import gerber.uchicago.edu.Places.Restaurant;
 import gerber.uchicago.edu.R;
 import gerber.uchicago.edu.ResultsDialogActivity;
@@ -164,6 +165,7 @@ public class Tab4 extends Fragment {
                         mDbAdapter.updateResto(restoEdit);
 
                     }
+                    ((MainActivity) getActivity()).changetab(0);
 
                 }
 
@@ -180,8 +182,7 @@ public class Tab4 extends Fragment {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Don't do anything -- doesn't make sense to finish a fragment
-                /*finish();*/
+                ((MainActivity) getActivity()).changetab(0);
             }
         });
         mViewFavorite = v.findViewById(R.id.view_favorite);
