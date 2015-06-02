@@ -142,7 +142,8 @@ public class MainActivity extends ActionBarActivity implements
             }
             bTutorial = true;
             //set the flag in preferences so that this block will never be called again.
-            mPreferences.edit().putBoolean(VERY_FIRST_LOAD_MAIN, false).commit();
+            //We comment this out so that DB inserts new restaurant before the block is called
+            //mPreferences.edit().putBoolean(VERY_FIRST_LOAD_MAIN, false).commit();
 
         } else {
             //get it from the prefs
@@ -237,6 +238,9 @@ public class MainActivity extends ActionBarActivity implements
         adapter.notifyDataSetChanged();
     }
 
+    public void setRecentIdClicked(int id) {
+        this.mRecentIdClicked = id;
+    }
 
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;

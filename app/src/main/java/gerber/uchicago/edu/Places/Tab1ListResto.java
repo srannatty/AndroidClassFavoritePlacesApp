@@ -129,6 +129,7 @@ public class Tab1ListResto extends Fragment  {
         if (bFirstLoad) {
             mDbAdapter.insertSomeRestos();
             //set the flag in preferences so that this block will never be called again.
+            ((MainActivity)getActivity()).setRecentIdClicked(mDbAdapter.fetchSomeID());
             mPreferences.edit().putBoolean(VERY_FIRST_LOAD, false).commit();
         }
 
