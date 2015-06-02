@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class Tab3EditResto extends Fragment {
 
     private OnTab1InteractionListener mListener;
 
-    private LinearLayout mRootViewGroup;
+    private ScrollView mRootViewGroup;
     private EditText mNameField, mCityField, mAddressField, mPhoneField, mYelpField;
     private TextView mPhoneText, mAddressText, mYelpText;
     private Button mExtractButton, mSaveButton, mCancelButton;
@@ -119,7 +120,7 @@ public class Tab3EditResto extends Fragment {
 
         //This is where things break
         //This is NOT ScrollView!!!!!!
-        mRootViewGroup = (LinearLayout) v.findViewById(R.id.data_root_view_group);
+        mRootViewGroup = (ScrollView) v.findViewById(R.id.data_root_view_group_edit);
 
 
         mNameField = (EditText) v.findViewById(R.id.restaurant_name);
@@ -265,7 +266,7 @@ public class Tab3EditResto extends Fragment {
 
             //if this is a edit record then set the save button to enabled and extract button to visible
             mSaveButton.setEnabled(true);
-            mExtractButton.setVisibility(View.VISIBLE);
+            //mExtractButton.setVisibility(View.VISIBLE);
             mStrImageUrl = mRestaurant.getImageUrl();
 
             fetchPhoto(mPhotoView);
@@ -329,7 +330,7 @@ public class Tab3EditResto extends Fragment {
     private void updateButtons(CharSequence charSequence, String strOther) {
         if (!charSequence.toString().trim().equalsIgnoreCase("") && !strOther.trim().equalsIgnoreCase("")) {
 
-            mExtractButton.setVisibility(View.VISIBLE);
+            //mExtractButton.setVisibility(View.VISIBLE);
             mSaveButton.setEnabled(true);
 
 
@@ -454,6 +455,8 @@ public class Tab3EditResto extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mDbAdapter.open();
+
         if ((mItemid != -1) && (mItemid != 0)) {
             mRestaurant = mDbAdapter.fetchRestoById(mItemid);
         }
@@ -479,12 +482,12 @@ public class Tab3EditResto extends Fragment {
 
             //if this is a edit record then set the save button to enabled and extract button to visible
             mSaveButton.setEnabled(true);
-            mExtractButton.setVisibility(View.VISIBLE);
+            //mExtractButton.setVisibility(View.VISIBLE);
             mStrImageUrl = mRestaurant.getImageUrl();
 
             fetchPhoto(mPhotoView);
         }
-        mDbAdapter.open();
+
     }
 
     private void fetchPhoto(ImageView imageView) {
