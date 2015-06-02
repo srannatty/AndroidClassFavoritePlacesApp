@@ -101,6 +101,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    //@Override
+    public int getItemPosition() {
+        return POSITION_NONE;
+    }
+
     // This method return the titles for the Tabs in the Tab Strip
 
     @Override

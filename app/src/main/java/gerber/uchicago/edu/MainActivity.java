@@ -28,6 +28,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import gerber.uchicago.edu.Places.Tab3EditResto;
 import gerber.uchicago.edu.Places.Tab1ListResto;
+import gerber.uchicago.edu.db.RestosDbAdapter;
 import gerber.uchicago.edu.sound.SoundVibeUtils;
 
 /**
@@ -61,6 +62,8 @@ public class MainActivity extends ActionBarActivity implements
     private int currentColor;
     private SystemBarTintManager mTintManager;
     // private LayoutInflater mInflator;
+
+    private RestosDbAdapter mDbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,17 +132,49 @@ public class MainActivity extends ActionBarActivity implements
         inflateActionBar(actionBar, 0);
 
 
+        //Doing this because oncreate is only called once
+        mDbAdapter = new RestosDbAdapter(this);
+        mDbAdapter.open();
+        mRecentIdClicked = mDbAdapter.fetchSomeID();
+        mDbAdapter.close();
+
     }
 
+
+    @Override
+    public void onPageSelected(int position) {
+
+        SoundVibeUtils.playSound(this, R.raw.swish);
+        switch (position) {
+            case 0:
+            case 1:
+                changeColor(getResources().getColor(R.color.purple_dark), getResources().getColor(R.color.purple));
+                break;
+            case 2:
+                changeColor(getResources().getColor(R.color.orange_dark), getResources().getColor(R.color.orange));
+
+                break;
+            case 3:
+                changeColor(getResources().getColor(R.color.green_dark), getResources().getColor(R.color.green));
+
+                break;
+        }
+
+    }
+
+
     public void changetab(int tabnumber) {
+        //pager.setAdapter(adapter);
+        //onPageSelected(tabnumber);
+        //This is to trick the viewpager to reload the fragments
+        pager.setCurrentItem(3);
         pager.setCurrentItem(tabnumber);
+        adapter.notifyDataSetChanged();
     }
 
 
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
-        //adapter.notifyDataSetChanged();
-        //adapter.notifyDataSetChanged();
         pager.setAdapter(adapter);
         pager.setCurrentItem(2);
 
@@ -308,7 +343,6 @@ public class MainActivity extends ActionBarActivity implements
     private void changeColor(int newColor, int tabColor) {
         tabs.setBackgroundColor(tabColor);
 
-
         mTintManager.setTintColor(newColor);
         // change ActionBar color just if an ActionBar is available
         Drawable colorDrawable = new ColorDrawable(newColor);
@@ -330,26 +364,6 @@ public class MainActivity extends ActionBarActivity implements
     }
 
 
-    @Override
-    public void onPageSelected(int position) {
-
-        SoundVibeUtils.playSound(this, R.raw.swish);
-        switch (position) {
-            case 0:
-            case 1:
-                changeColor(getResources().getColor(R.color.purple_dark), getResources().getColor(R.color.purple));
-                break;
-            case 2:
-                changeColor(getResources().getColor(R.color.orange_dark), getResources().getColor(R.color.orange));
-
-                break;
-            case 3:
-                changeColor(getResources().getColor(R.color.green_dark), getResources().getColor(R.color.green));
-
-                break;
-        }
-
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

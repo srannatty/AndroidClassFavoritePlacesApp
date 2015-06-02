@@ -78,7 +78,6 @@ public class Tab2GridResto extends Fragment {
         //super.onCreate(savedInstanceState);
 
         mGridView = (GridView) v.findViewById(R.id.restaurant_grid_item);
-
         mDbAdapter = new RestosDbAdapter(getActivity());
         mDbAdapter.open();
 

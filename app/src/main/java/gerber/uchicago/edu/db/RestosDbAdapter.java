@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import gerber.uchicago.edu.Places.Restaurant;
+import gerber.uchicago.edu.PrefsMgr;
 
 import java.util.ArrayList;
 
@@ -143,6 +144,23 @@ public class RestosDbAdapter {
 
         );
         return resto;
+    }
+
+
+
+    public int fetchSomeID() {
+        int id=0;
+        Cursor cursor = fetchAllRestos(PrefsMgr.getString(mCtx,"sort_order"));
+        int sizeDb = cursor.getCount();
+
+        if (sizeDb == 0) {
+            return id;
+        }
+        else {
+            cursor.moveToFirst();
+            id = (int) cursor.getLong(cursor.getColumnIndex("_id"));
+        }
+        return id;
     }
 
     public Cursor fetchAllRestos(String strSort) {

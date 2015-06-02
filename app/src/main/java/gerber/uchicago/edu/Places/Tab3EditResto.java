@@ -188,7 +188,8 @@ public class Tab3EditResto extends Fragment {
                         );
                         mDbAdapter.updateResto(restoEdit);
                     }
-                    ((MainActivity) getActivity()).changetab(0);
+                    MainActivity context = (MainActivity)getActivity();
+                    context.changetab(0);
                 }
 
             }
