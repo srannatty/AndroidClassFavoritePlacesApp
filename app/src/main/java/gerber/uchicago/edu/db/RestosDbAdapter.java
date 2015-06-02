@@ -150,7 +150,7 @@ public class RestosDbAdapter {
 
     public int fetchSomeID() {
         int id=0;
-        Cursor cursor = fetchAllRestos(PrefsMgr.getString(mCtx,"sort_order"));
+        Cursor cursor = fetchAllRestos(PrefsMgr.getString(mCtx, "sort_order"));
         int sizeDb = cursor.getCount();
 
         if (sizeDb == 0) {
@@ -177,8 +177,14 @@ public class RestosDbAdapter {
         return mCursor;
     }
 
+    // 1 denotes true to Favorite, 0 denotes false to Favorite for bFav
+    public Cursor fetchCategory(int bFav) {
+        Cursor mCursor = mDb.query(SQLITE_TABLE,
+                new String[]{COL_ID, COL_FAV, COL_NAME, COL_CITY, COL_ADDRESS, COL_PHONE, COL_YELP, COL_IMG_URL},
+                COL_FAV + "=?", new String[]{String.valueOf(bFav)}, null, null, null);
 
-
+        return mCursor;
+    }
 
 
 

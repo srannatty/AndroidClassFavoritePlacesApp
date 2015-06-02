@@ -61,6 +61,8 @@ public class MainActivity extends ActionBarActivity implements
 
     ActionMode mActionMode;
     boolean bButtonArray[] = new boolean[3];
+    boolean bAll;  //indicates the non-use of bFav for filtering
+    boolean bFav;  //used for filtering true indicates show favorite places
     SharedPreferences mPreferences;
 
     int mRecentIdClicked;
@@ -88,6 +90,10 @@ public class MainActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //filter stuff default;
+        bAll = true;
+        bFav = true;
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -242,6 +248,14 @@ public class MainActivity extends ActionBarActivity implements
         this.mRecentIdClicked = id;
     }
 
+    public boolean getbFav() {
+        return this.bFav;
+    }
+
+    public boolean getbAll() {
+        return this.bAll;
+    }
+
     public void gotoEditTab(int itemID) {
         mRecentIdClicked = itemID;
         pager.setAdapter(adapter);
@@ -333,13 +347,44 @@ public class MainActivity extends ActionBarActivity implements
                     //  mRestoClicked = mDbAdapter.fetchRestoById(mIdClicked);
                     dialog.setTitle("Set Filter");
                     dialog.show();
-                    vx.setOnClickListener(new View.OnClickListener() {
+
+                    //All Case
+
+                    LinearLayout all = (LinearLayout) dialog.findViewById(R.id.fitler_1);
+                    all.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            bAll = true;
                             dialog.dismiss();
                         }
                     });
 
+                    //Favorite Case
+                    LinearLayout fav = (LinearLayout) dialog.findViewById(R.id.fitler_2);
+                    fav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bAll = false;
+                            bFav = true;
+                            dialog.dismiss();
+                        }
+                    });
+
+                    //Not Favorite Case
+                    LinearLayout nfav = (LinearLayout) dialog.findViewById(R.id.fitler_3);
+                    nfav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bAll = false;
+                            bFav = false;
+                            dialog.dismiss();
+                        }
+                    });
+
+
+                }
+                else {
+                    bAll = true;
                 }
 
 

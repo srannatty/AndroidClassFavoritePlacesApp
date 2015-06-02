@@ -95,7 +95,25 @@ public class Tab2GridResto extends Fragment {
         }
 
         mSortOrder = mPreferences.getString(SORT_ORDER, null);
-        Cursor cursor = mDbAdapter.fetchAllRestos(getSortOrder());
+
+
+        boolean bAll = ((MainActivity) getActivity()).getbAll();
+        boolean bFav = ((MainActivity) getActivity()).getbFav();
+        Cursor cursor;
+
+        if (bAll) {
+            cursor = mDbAdapter.fetchAllRestos(getSortOrder());
+        } else {
+            if (bFav) {
+                //cursor for favorite
+                cursor = mDbAdapter.fetchCategory(1);
+            } else {
+                //cursor for non-favorite
+                cursor = mDbAdapter.fetchCategory(0);
+            }
+        }
+
+        //Cursor cursor = mDbAdapter.fetchAllRestos(getSortOrder());
 
         //from columns defined in the db
         String[] from = new String[]{
@@ -285,7 +303,26 @@ public class Tab2GridResto extends Fragment {
         super.onResume();
         mDbAdapter.open();
         // mDbAdapter.insertSomeRestos();
-        mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+        //mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+        boolean bAll = ((MainActivity) getActivity()).getbAll();
+        boolean bFav = ((MainActivity) getActivity()).getbFav();
+        Cursor cursor;
+
+        if (bAll) {
+            mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+        } else {
+            if (bFav) {
+                //cursor for favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(1));
+            } else {
+                //cursor for non-favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(0));
+            }
+        }
+
+        mCursorAdapter.notifyDataSetChanged();
+        mGridView.invalidateViews();
+        mGridView.refreshDrawableState();
 
     }
 

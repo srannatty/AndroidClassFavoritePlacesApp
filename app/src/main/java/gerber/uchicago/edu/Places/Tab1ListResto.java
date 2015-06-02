@@ -134,8 +134,23 @@ public class Tab1ListResto extends Fragment  {
         }
 
         mSortOrder = mPreferences.getString(SORT_ORDER, null);
-        Cursor cursor = mDbAdapter.fetchAllRestos(getSortOrder());
 
+
+        boolean bAll = ((MainActivity) getActivity()).getbAll();
+        boolean bFav = ((MainActivity) getActivity()).getbFav();
+        Cursor cursor;
+
+        if (bAll) {
+            cursor = mDbAdapter.fetchAllRestos(getSortOrder());
+        } else {
+            if (bFav) {
+                //cursor for favorite
+                cursor = mDbAdapter.fetchCategory(1);
+            } else {
+                //cursor for non-favorite
+                cursor = mDbAdapter.fetchCategory(0);
+            }
+        }
 
         //from columns defined in the db
         String[] from = new String[]{
@@ -149,19 +164,21 @@ public class Tab1ListResto extends Fragment  {
                 R.id.list_city
         };
 
-        mCursorAdapter = new RestosSimpleCursorAdapter(
-                //context
-                getActivity(),
-                //the layout of the row - now pulling from our new layout
-                R.layout.restos_row,
-                //cursor
-                cursor,
-                //from columns defined in the db
-                from,
-                //to the ids of views in the layout
-                to,
-                //flag - not used
-                0);
+
+            mCursorAdapter = new RestosSimpleCursorAdapter(
+                    //context
+                    getActivity(),
+                    //the layout of the row - now pulling from our new layout
+                    R.layout.restos_row,
+                    //cursor
+                    cursor,
+                    //from columns defined in the db
+                    from,
+                    //to the ids of views in the layout
+                    to,
+                    //flag - not used
+                    0);
+
 
 
         //the cursorAdapter (controller) is now updating the listView (view) with data from the db (model)
@@ -401,7 +418,26 @@ public class Tab1ListResto extends Fragment  {
         super.onResume();
         mDbAdapter.open();
         // mDbAdapter.insertSomeRestos();
-        mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+
+        boolean bAll = ((MainActivity) getActivity()).getbAll();
+        boolean bFav = ((MainActivity) getActivity()).getbFav();
+        Cursor cursor;
+
+        if (bAll) {
+            mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+
+        } else {
+            if (bFav) {
+                //cursor for favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(1));
+            } else {
+                //cursor for non-favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(0));
+            }
+        }
+        mCursorAdapter.notifyDataSetChanged();
+        mListView.invalidateViews();
+        mListView.refreshDrawableState();
 
     }
 

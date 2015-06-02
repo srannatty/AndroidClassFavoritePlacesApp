@@ -57,7 +57,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                     Tab3Edit tab3Edit = new Tab3Edit();
                     return tab3Edit;
                 } else {
-                    //todo race condition things
                     Tab3EditResto tab3EditResto =
                             Tab3EditResto.newInstance(((MainActivity) mContext).mRecentIdClicked);
                     return tab3EditResto;

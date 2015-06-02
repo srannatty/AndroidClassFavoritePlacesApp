@@ -18,7 +18,6 @@ public class PrefsMgr {
         SharedPreferences.Editor editor = sSharedPreferences.edit();
         editor.putString(locale, code);
         editor.commit();
-
     }
 
     public static String getString(Context context, String locale) {
@@ -52,6 +51,5 @@ public class PrefsMgr {
         return array;
 
     }
-
 
 }
