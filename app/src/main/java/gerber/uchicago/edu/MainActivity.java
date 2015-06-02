@@ -136,7 +136,6 @@ public class MainActivity extends ActionBarActivity implements
         //adapter.notifyDataSetChanged();
         pager.setCurrentItem(2);
         adapter.notifyDataSetChanged();
-
         return;
     }
 

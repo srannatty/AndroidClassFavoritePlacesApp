@@ -50,7 +50,7 @@ import gerber.uchicago.edu.db.RestosDbAdapter;
 public class Tab4 extends Fragment {
 
     //THIS IS TAB 4, ACTUALLY adding new restaurant
-    private LinearLayout mRootViewGroup;
+    private ScrollView mRootViewGroup;
     private EditText mNameField, mCityField, mAddressField, mPhoneField, mYelpField;
     private TextView mPhoneText, mAddressText, mYelpText;
     private Button mExtractButton, mSaveButton, mCancelButton;
@@ -98,7 +98,7 @@ public class Tab4 extends Fragment {
 
         //This is where things break
         //This is NOT ScrollView!!!!!!
-        mRootViewGroup = (LinearLayout) v.findViewById(R.id.data_root_view_group_resto_new);
+        mRootViewGroup = (ScrollView) v.findViewById(R.id.data_root_view_group_resto_new);
 
 
         mNameField = (EditText) v.findViewById(R.id.restaurant_name);
