@@ -552,7 +552,6 @@ public class Tab3EditResto extends Fragment {
                 mImageView.setImageBitmap(result);
             }
 
-
         }
     }
 
