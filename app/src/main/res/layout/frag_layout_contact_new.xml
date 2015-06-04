@@ -62,7 +62,7 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search Term:"
+                android:text="Name:"
                 />
 
             <EditText
@@ -70,14 +70,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:hint="e.g. Adam or Gerber"
+                android:hint="e.g. Adam Gerber"
                 />
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I don't know if we need this:"
+                android:text="Search Term"
                 />
 
             <EditText
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:hint="I don't know if we need this"
+                android:hint="e.g. flower or name of the person"
                 />
 
         </LinearLayout>

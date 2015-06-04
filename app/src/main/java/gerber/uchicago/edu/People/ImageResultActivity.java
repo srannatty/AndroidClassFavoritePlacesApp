@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -21,9 +22,10 @@ import gerber.uchicago.edu.R;
  * Created by jennifer1 on 6/1/15.
  */
 public class ImageResultActivity extends ListActivity {
-    public static final String POSITION = "position";
+    public static final String RESULT_BITMAP_ARRAY = "result_bitmap_array";
+    public static final String RESULT_POSITION = "result_position";
 
-/*
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,9 @@ public class ImageResultActivity extends ListActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         ArrayList<String> UrlArrayList = (ArrayList<String>) getIntent().getSerializableExtra("image_data_bundle_key");
-        ArrayList<Bitmap> ImageArrayList = ArrayListConversion(UrlArrayList);
 
-        ArrayAdapter<Bitmap> modeAdapter = new ArrayAdapter<Bitmap>(this, R.layout.pop_image_layout, R.id.pictures, ImageArrayList);
+        final ArrayList<Bitmap> imageArrayList = ArrayListConversion(UrlArrayList);
+        ArrayAdapter<Bitmap> modeAdapter = new ArrayAdapter<Bitmap>(this, R.layout.pop_image_layout, R.id.pictures, imageArrayList);
 
         setListAdapter(modeAdapter);
 
@@ -43,7 +45,8 @@ public class ImageResultActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra(POSITION, position);
+                returnIntent.putExtra(RESULT_POSITION, position);
+                returnIntent.putExtra(RESULT_BITMAP_ARRAY, imageArrayList);
                 setResult(RESULT_OK,returnIntent);
                 finish();
 
@@ -63,13 +66,17 @@ public class ImageResultActivity extends ListActivity {
         for (int i=0; i < listSize; i++) {
             strImage = urlArray.get(i);
             //whyyyyyyyyyyyyyy
-            in = new java.net.URL(strImage).openStream();
-            bitmap = BitmapFactory.decodeStream(in);
-            result.add(i,bitmap);
+            try {
+                in = new java.net.URL(strImage).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+                result.add(i,bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         return result;
     }
 
-*/
 
 }

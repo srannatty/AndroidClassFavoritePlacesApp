@@ -224,7 +224,7 @@ public class Tab4New extends Fragment {
 
 
     private void fetchPhoto(ImageView imageView) {
-        String strUrl = String.format("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s&imgsz=small&imgtype=photo",
+        String strUrl = String.format("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s&imgsz=small&imgtype=photo",
                 mSearchField.getText().toString());
         strUrl = strUrl.replaceAll("\\s+", "%20");
         new PersonImageTask(imageView).execute(strUrl);
@@ -292,17 +292,17 @@ public class Tab4New extends Fragment {
             if (resultCode == getActivity().RESULT_OK) {
                 //fetch the integer we passed into the dialog result which corresponds to the list position
 
-                int nResult = data.getIntExtra(ImageResultActivity.POSITION, -98);
+                ArrayList<Bitmap> bitmapArrayResult = (ArrayList<Bitmap>)
+                        data.getSerializableExtra(ImageResultActivity.RESULT_BITMAP_ARRAY);
 
+                int nResult = data.getIntExtra(ImageResultActivity.RESULT_POSITION, -98);
 
                 if (nResult != -98) {
                     try {
                         mStrImageUrl = "";
-                        //YelpResultsData.Business biz = mYelpResultsData.businesses.get(nResult);
-                        //mNameField.setText(biz.name);
-                        //mAddressField.setText(biz.location.address.get(0));
-                        //mPhoneField.setText(PhoneNumberUtils.formatNumber(biz.phone));
-                        //mYelpField.setText(biz.url);
+                        Bitmap resultBitmap = bitmapArrayResult.get(nResult);
+                        mPhotoView.setImageBitmap(resultBitmap);
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
