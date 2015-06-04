@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="fill_horizontal" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill_horizontal">
 
 
 
@@ -137,7 +138,9 @@
 
             android:adjustViewBounds="true"
             android:background="@drawable/pressed_mask"
-            android:src="@drawable/search_world_white" />
+            android:src="@drawable/search_world_white"
+            android:actionViewClass="android.widget.SearchView"
+            />
     </LinearLayout>
 
 

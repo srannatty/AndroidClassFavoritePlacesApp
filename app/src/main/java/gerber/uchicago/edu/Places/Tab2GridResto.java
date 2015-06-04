@@ -290,6 +290,35 @@ public class Tab2GridResto extends Fragment {
         return cursor.getInt(RestosDbAdapter.INDEX_ID);
     }
 
+    public void updateView() {
+        mCursorAdapter.notifyDataSetChanged();
+        mGridView.invalidateViews();
+        mGridView.refreshDrawableState();
+    }
+
+    public void filter_on() {
+        if (!mDbAdapter.isopen()) {
+            mDbAdapter.open();
+        }
+
+        boolean bAll = ((MainActivity) getActivity()).getbAll();
+        boolean bFav = ((MainActivity) getActivity()).getbFav();
+
+        if (bAll) {
+            mCursorAdapter.changeCursor(mDbAdapter.fetchAllRestos(getSortOrder()));
+
+        } else {
+            if (bFav) {
+                //cursor for favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(1));
+            } else {
+                //cursor for non-favorite
+                mCursorAdapter.changeCursor(mDbAdapter.fetchCategory(0));
+            }
+        }
+        updateView();
+
+    }
 
 
     @Override

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,6 +34,9 @@ import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import java.util.List;
+
+import gerber.uchicago.edu.Places.Tab2GridResto;
 import gerber.uchicago.edu.Places.Tab3EditResto;
 import gerber.uchicago.edu.Places.Tab1ListResto;
 import gerber.uchicago.edu.db.RestosDbAdapter;
@@ -236,13 +240,31 @@ public class MainActivity extends ActionBarActivity implements
 
 
     public void changetab(int tabnumber) {
-        //pager.setAdapter(adapter);
-        //onPageSelected(tabnumber);
         //This is to trick the viewpager to reload the fragments
         pager.setCurrentItem(3);
         pager.setCurrentItem(tabnumber);
         adapter.notifyDataSetChanged();
     }
+
+    //Used for refreshing fragment view when setting filters
+    private void Refresh_Views_frags() {
+        List<Fragment> fragLists = getSupportFragmentManager().getFragments();
+        for (android.support.v4.app.Fragment frag : fragLists) {
+            if (frag != null) {
+                try {
+                    ((Tab1ListResto) frag).filter_on();
+                } catch (Exception e) {
+                    try {
+                        ((Tab2GridResto) frag).filter_on();
+                    } catch (Exception e1) {
+                        Log.d("all_frags", "tried for non-view frags");
+                    }
+                }
+            }
+        }
+    }
+
+
 
     public void setRecentIdClicked(int id) {
         this.mRecentIdClicked = id;
@@ -355,6 +377,8 @@ public class MainActivity extends ActionBarActivity implements
                         @Override
                         public void onClick(View v) {
                             bAll = true;
+                            adapter.notifyDataSetChanged();
+                            Refresh_Views_frags();
                             dialog.dismiss();
                         }
                     });
@@ -366,6 +390,8 @@ public class MainActivity extends ActionBarActivity implements
                         public void onClick(View v) {
                             bAll = false;
                             bFav = true;
+                            adapter.notifyDataSetChanged();
+                            Refresh_Views_frags();
                             dialog.dismiss();
                         }
                     });
@@ -377,6 +403,8 @@ public class MainActivity extends ActionBarActivity implements
                         public void onClick(View v) {
                             bAll = false;
                             bFav = false;
+                            adapter.notifyDataSetChanged();
+                            Refresh_Views_frags();
                             dialog.dismiss();
                         }
                     });
@@ -385,6 +413,8 @@ public class MainActivity extends ActionBarActivity implements
                 }
                 else {
                     bAll = true;
+                    adapter.notifyDataSetChanged();
+                    Refresh_Views_frags();
                 }
 
 
@@ -397,6 +427,7 @@ public class MainActivity extends ActionBarActivity implements
                 //Search Button
                 Log.d("view3", "GGG");
                 mActionMode = MainActivity.this.startSupportActionMode(MainActivity.this);
+
 
             }
         });

@@ -73,7 +73,6 @@ public class RestosDbAdapter {
     public void open() throws SQLException {
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
-
     }
 
     //close
@@ -229,6 +228,9 @@ public class RestosDbAdapter {
 
     }
 
+    public boolean isopen() {
+        return mDb.isOpen();
+    }
 
     //static inner class
     private static class DatabaseHelper extends SQLiteOpenHelper {

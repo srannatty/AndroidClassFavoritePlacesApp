@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_dark"
-    tools:context="com.apress.gerber.favrestos.app.RemindersActivity">
+    tools:context="com.apress.gerber.favrestos.app.RemindersActivity"
+    android:id="@+id/tab1_listview_viewgroup"
+    >
 
     <ListView
         android:layout_width="match_parent"

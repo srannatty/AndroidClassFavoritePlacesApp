@@ -3,7 +3,9 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="gerber.uchicago.edu.ListFragment">
+             tools:context="gerber.uchicago.edu.ListFragment"
+    android:id="@+id/tab2_gridview_viewgroup"
+    >
 
     <GridView
         android:id="@+id/restaurant_grid_item"
